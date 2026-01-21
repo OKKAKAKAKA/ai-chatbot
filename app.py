@@ -56,36 +56,36 @@ with st.form(key="chat_form", clear_on_submit=True):
         if "flood" in text:
             response = (
                 "🚨 Flood Safety Tips:\n"
-                "- Move to higher ground immediately.\n"
-                "- Avoid walking/driving through flood waters.\n"
-                "- Turn off electricity if water enters your home.\n"
+                "- Move to higher ground immediately, "
+                "- Avoid walking/driving through flood waters, "
+                "- Turn off electricity if water enters your home, "
                 "- Prepare an emergency kit with water, food, and medicines."
             )
 
         elif "typhoon" in text:
             response = (
                 "🌪️ Typhoon Safety Tips:\n"
-                " Stay indoors and away from windows., "
-                " Secure loose objects outside., "
-                " Charge your phone and prepare emergency supplies., "
+                " Stay indoors and away from windows, "
+                " Secure loose objects outside, "
+                " Charge your phone and prepare emergency supplies, "
                 " Listen to local updates and evacuation orders."
             )
 
         elif "earthquake" in text:
             response = (
                 "🌏 Earthquake Safety Tips:\n"
-                "- DROP, COVER, and HOLD ON.\n"
-                "- Stay away from windows and heavy furniture.\n"
-                "- If outside, move to an open area.\n"
+                "- DROP, COVER, and HOLD ON, "
+                "- Stay away from windows and heavy furniture, "
+                "- If outside, move to an open area, "
                 "- After shaking stops, check for injuries and damage."
             )
 
         elif "fire" in text:
             response = (
                 "🔥 Fire Safety Tips:\n"
-                "- Get out immediately and call emergency services.\n"
-                "- Use stairs, not elevators.\n"
-                "- If smoke is present, stay low and cover your mouth.\n"
+                "- Get out immediately and call emergency services, "
+                "- Use stairs, not elevators, "
+                "- If smoke is present, stay low and cover your mouth, "
                 "- Have a fire extinguisher ready and know your exits."
             )
 
