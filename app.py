@@ -163,6 +163,10 @@ if "messages" not in st.session_state:
         {"role": "bot", "text": "Hi! I’m AlertAid 🤖\nHow can I help you today?"}
     ]
 
+# ---- IMPORTANT FIX ----
+if "input_text" not in st.session_state:
+    st.session_state.input_text = ""
+
 # ------------------- CHAT DISPLAY -------------------
 st.markdown('<div class="chatbox">', unsafe_allow_html=True)
 
@@ -180,7 +184,6 @@ st.markdown('<div class="input-area">', unsafe_allow_html=True)
 with st.form(key="chat_form"):
     col1, col2 = st.columns([4, 1])
 
-    # IMPORTANT: use key to store value
     user_input = st.text_input("", key="input_text")
 
     with col2:
