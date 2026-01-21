@@ -180,11 +180,11 @@ st.markdown('</div>', unsafe_allow_html=True)
 # ------------------- INPUT AREA (BOTTOM) -------------------
 st.markdown('<div class="input-area">', unsafe_allow_html=True)
 
-with st.form(key="chat_form"):
+with st.form(key="chat_form", clear_on_submit=True):
     col1, col2 = st.columns([4, 1])
 
-    # THIS is the correct way to get the current text value
-    user_input = st.text_input("", key="input_text")
+    # NO session_state key here
+    user_input = st.text_input("", placeholder="Type your message...")
 
     with col2:
         submit = st.form_submit_button("Send")
@@ -193,6 +193,3 @@ with st.form(key="chat_form"):
         st.session_state.messages.append({"role": "user", "text": user_input})
         bot_response = get_response(user_input)
         st.session_state.messages.append({"role": "bot", "text": bot_response})
-
-        # CLEAR INPUT AFTER SENDING
-        st.session_state.input_text = ""
