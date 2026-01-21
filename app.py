@@ -1,196 +1,98 @@
 import streamlit as st
 
-st.set_page_config(page_title="AlertAid", page_icon="🛑", layout="centered")
+st.set_page_config(page_title="AlertAid", layout="wide")
 
-# ------------------- STYLING -------------------
+# Centered title
 st.markdown(
     """
-    <style>
-    body {
-        background-color: #FFFFFF;
-    }
-    .title {
-        text-align: center;
-        font-size: 50px;
-        font-weight: bold;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        color: #2E3A59;
-        font-family: 'Arial', sans-serif;
-    }
-    .chatbox {
-        max-width: 700px;
-        margin: 0 auto;
-        padding: 20px;
-        border-radius: 20px;
-    }
-    .user {
-        text-align: right;
-        background-color: #DCF8C6;
-        padding: 12px;
-        border-radius: 20px;
-        width: fit-content;
-        max-width: 70%;
-        float: right;
-        clear: both;
-        margin: 5px 0;
-    }
-    .bot {
-        text-align: left;
-        background-color: #F1F0F0;
-        padding: 12px;
-        border-radius: 20px;
-        width: fit-content;
-        max-width: 70%;
-        float: left;
-        clear: both;
-        margin: 5px 0;
-    }
-    .input-area {
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        background: white;
-        padding: 10px 0;
-        box-shadow: 0 -1px 8px rgba(0,0,0,0.1);
-    }
-    </style>
+    <h1 style='text-align: center; color: #2E86C1;'>
+        AlertAid
+    </h1>
     """,
-    unsafe_allow_html=True
+    unsafe_allow_html=True,
 )
 
-# ------------------- TITLE -------------------
-st.markdown('<div class="title">AlertAid</div>', unsafe_allow_html=True)
-
-# ------------------- DISASTER FUNCTIONS -------------------
-def earthquake_before():
-    return "- Secure heavy furniture\n- Prepare emergency kit\n- Identify safe places in your home"
-
-def earthquake_during():
-    return "- Drop, Cover, and Hold On\n- Stay away from windows"
-
-def earthquake_after():
-    return "- Check for injuries\n- Be alert for aftershocks"
-
-def earthquake_info():
-    return "An earthquake is the sudden shaking of the ground caused by movements in the Earth's crust."
-
-def typhoon_before():
-    return "- Monitor weather updates\n- Secure loose objects\n- Prepare emergency supplies\n- Check evacuation routes"
-
-def typhoon_during():
-    return "- Stay indoors\n- Avoid floodwaters\n- Keep away from windows\n- Listen to official warnings"
-
-def typhoon_after():
-    return "- Avoid fallen power lines\n- Check for structural damage\n- Stay updated with official announcements"
-
-def typhoon_info():
-    return "A typhoon is a powerful tropical cyclone with strong winds and heavy rainfall."
-
-def flood_before():
-    return "- Prepare evacuation routes\n- Elevate appliances and important items\n- Store clean water and emergency supplies\n- Secure important documents"
-
-def flood_during():
-    return "- Move to higher ground immediately\n- Avoid walking or driving through floodwaters\n- Stay away from electrical wires\n- Listen to official alerts"
-
-def flood_after():
-    return "- Return home only when authorities say it’s safe\n- Clean and disinfect your home\n- Avoid contact with contaminated water\n- Check for damage"
-
-def flood_info():
-    return "A flood occurs when water overflows onto normally dry land."
-
-def fire_before():
-    return "- Check electrical wiring and outlets\n- Keep fire extinguishers ready\n- Install smoke detectors\n- Plan escape routes"
-
-def fire_during():
-    return "- Stay low to avoid smoke\n- Evacuate immediately\n- Use the nearest exit\n- Do not use elevators"
-
-def fire_after():
-    return "- Do not re-enter burned areas\n- Call emergency services if needed\n- Seek medical help for injuries\n- Contact authorities for safety inspection"
-
-def fire_info():
-    return "Fire is a rapid chemical reaction that produces heat, light, and smoke."
-
-# ------------------- CHAT FUNCTION -------------------
-def get_response(user_input):
-    user_input = user_input.lower()
-
-    # 🔥 FLOOD KEYWORDS
-    if "what is" in user_input and "flood" in user_input:
-        return flood_info()
-    if "before" in user_input and "flood" in user_input:
-        return flood_before()
-    if "during" in user_input and "flood" in user_input:
-        return flood_during()
-    if "after" in user_input and "flood" in user_input:
-        return flood_after()
-
-    # 🔥 FIRE KEYWORDS
-    if "what is" in user_input and "fire" in user_input:
-        return fire_info()
-    if "before" in user_input and "fire" in user_input:
-        return fire_before()
-    if "during" in user_input and "fire" in user_input:
-        return fire_during()
-    if "after" in user_input and "fire" in user_input:
-        return fire_after()
-
-    # 🔥 EARTHQUAKE KEYWORDS
-    if "what is" in user_input and "earthquake" in user_input:
-        return earthquake_info()
-    if "before" in user_input and "earthquake" in user_input:
-        return earthquake_before()
-    if "during" in user_input and "earthquake" in user_input:
-        return earthquake_during()
-    if "after" in user_input and "earthquake" in user_input:
-        return earthquake_after()
-
-    # 🔥 TYPHOON KEYWORDS
-    if "what is" in user_input and "typhoon" in user_input:
-        return typhoon_info()
-    if "before" in user_input and "typhoon" in user_input:
-        return typhoon_before()
-    if "during" in user_input and "typhoon" in user_input:
-        return typhoon_during()
-    if "after" in user_input and "typhoon" in user_input:
-        return typhoon_after()
-
-    return "Sorry, I didn't understand. Please ask a disaster-related question."
-
-# ------------------- CHAT STATE -------------------
+# Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "bot", "text": "Hi! I’m AlertAid 🤖\nAsk me about flood, fire, earthquake, or typhoon."}
+        {"role": "bot", "text": "Hello! I'm AlertAid. Ask me about Flood, Typhoon, Earthquake, or Fire safety."}
     ]
 
-# ------------------- CHAT DISPLAY -------------------
-st.markdown('<div class="chatbox">', unsafe_allow_html=True)
+def add_message(role, text):
+    st.session_state.messages.append({"role": role, "text": text})
 
+# Display chat
 for msg in st.session_state.messages:
-    if msg["role"] == "user":
-        st.markdown(f'<div class="user">{msg["text"]}</div>', unsafe_allow_html=True)
+    if msg["role"] == "bot":
+        st.markdown(
+            f"""
+            <div style="background-color:#E8F8F5; padding: 10px; border-radius: 10px; margin: 5px;">
+                <b>AlertAid:</b> {msg["text"]}
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
     else:
-        st.markdown(f'<div class="bot">{msg["text"]}</div>', unsafe_allow_html=True)
+        st.markdown(
+            f"""
+            <div style="text-align:right; background-color:#F0F3F4; padding: 10px; border-radius: 10px; margin: 5px;">
+                <b>You:</b> {msg["text"]}
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
-st.markdown('</div>', unsafe_allow_html=True)
+# Input box at the bottom
+with st.form(key="chat_form", clear_on_submit=True):
+    user_input = st.text_input("Type your message here...", "")
+    submit = st.form_submit_button("Send")
 
-# ------------------- INPUT AREA (BOTTOM) -------------------
-st.markdown('<div class="input-area">', unsafe_allow_html=True)
+    if submit and user_input.strip() != "":
+        add_message("user", user_input)
 
-# --- INPUT ---
-if "chat_input" not in st.session_state:
-    st.session_state.chat_input = ""
+        # Disaster-specific responses
+        text = user_input.lower()
 
-col1, col2 = st.columns([4, 1])
+        if "flood" in text:
+            response = (
+                "🚨 Flood Safety Tips:\n"
+                "- Move to higher ground immediately.\n"
+                "- Avoid walking/driving through flood waters.\n"
+                "- Turn off electricity if water enters your home.\n"
+                "- Prepare an emergency kit with water, food, and medicines."
+            )
 
-with col1:
-    st.text_input(" ", key="chat_input", placeholder="Type your message...", label_visibility="hidden")
+        elif "typhoon" in text:
+            response = (
+                "🌪️ Typhoon Safety Tips:\n"
+                "- Stay indoors and away from windows.\n"
+                "- Secure loose objects outside.\n"
+                "- Charge your phone and prepare emergency supplies.\n"
+                "- Listen to local updates and evacuation orders."
+            )
 
-with col2:
-    if st.button("Send"):
-        user_msg = st.session_state.chat_input.strip()
-        if user_msg:
-            st.session_state.messages.append({"role": "user", "text": user_msg})
-            st.session_state.messages.append({"role": "bot", "text": get_response(user_msg)})
+        elif "earthquake" in text:
+            response = (
+                "🌏 Earthquake Safety Tips:\n"
+                "- DROP, COVER, and HOLD ON.\n"
+                "- Stay away from windows and heavy furniture.\n"
+                "- If outside, move to an open area.\n"
+                "- After shaking stops, check for injuries and damage."
+            )
 
-        st.session_state.chat_input = ""
+        elif "fire" in text:
+            response = (
+                "🔥 Fire Safety Tips:\n"
+                "- Get out immediately and call emergency services.\n"
+                "- Use stairs, not elevators.\n"
+                "- If smoke is present, stay low and cover your mouth.\n"
+                "- Have a fire extinguisher ready and know your exits."
+            )
+
+        else:
+            response = (
+                "I can help with Flood, Typhoon, Earthquake, and Fire preparedness. "
+                "What would you like to know?"
+            )
+
+        add_message("bot", response)
