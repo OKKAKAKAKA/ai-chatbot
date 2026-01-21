@@ -56,10 +56,10 @@ with st.form(key="chat_form", clear_on_submit=True):
         if "flood" in text:
             response = (
                 "🚨 Flood Safety Tips:\n"
-                "- Move to higher ground immediately, "
-                "- Avoid walking/driving through flood waters, "
-                "- Turn off electricity if water enters your home, "
-                "- Prepare an emergency kit with water, food, and medicines."
+                " Move to higher ground immediately, "
+                " Avoid walking/driving through flood waters, "
+                " Turn off electricity if water enters your home, "
+                " Prepare an emergency kit with water, food, and medicines."
             )
 
         elif "typhoon" in text:
@@ -74,19 +74,19 @@ with st.form(key="chat_form", clear_on_submit=True):
         elif "earthquake" in text:
             response = (
                 "🌏 Earthquake Safety Tips:\n"
-                "- DROP, COVER, and HOLD ON, "
-                "- Stay away from windows and heavy furniture, "
-                "- If outside, move to an open area, "
-                "- After shaking stops, check for injuries and damage."
+                " DROP, COVER, and HOLD ON, "
+                " Stay away from windows and heavy furniture, "
+                " If outside, move to an open area, "
+                " After shaking stops, check for injuries and damage."
             )
 
         elif "fire" in text:
             response = (
                 "🔥 Fire Safety Tips:\n"
-                "- Get out immediately and call emergency services, "
-                "- Use stairs, not elevators, "
-                "- If smoke is present, stay low and cover your mouth, "
-                "- Have a fire extinguisher ready and know your exits."
+                " Get out immediately and call emergency services, "
+                " Use stairs, not elevators, "
+                " If smoke is present, stay low and cover your mouth, "
+                " Have a fire extinguisher ready and know your exits."
             )
 
         else:
