@@ -189,4 +189,3 @@ if submit and user_input:
     st.session_state.messages.append({"role": "user", "text": user_input})
     bot_response = get_response(user_input)
     st.session_state.messages.append({"role": "bot", "text": bot_response})
-    st.experimental_rerun()
