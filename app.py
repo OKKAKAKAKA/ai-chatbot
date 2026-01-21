@@ -13,9 +13,15 @@ st.markdown(
         text-align: center;
         font-size: 50px;
         font-weight: bold;
-        margin-bottom: 50px;
+        margin-bottom: 20px;
         color: #2E3A59;
         font-family: 'Arial', sans-serif;
+    }
+    .chatbox {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 20px;
     }
     .user {
         text-align: right;
@@ -39,10 +45,19 @@ st.markdown(
         clear: both;
         margin: 5px 0;
     }
-    .container {
+    .input-area {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: white;
+        padding: 10px 0;
+        box-shadow: 0 -1px 8px rgba(0,0,0,0.1);
+    }
+    .input-box {
         max-width: 700px;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0 auto;
+        display: flex;
+        gap: 10px;
     }
     </style>
     """,
@@ -150,24 +165,34 @@ def get_response(user_input):
 
 # ------------------- CHAT STATE -------------------
 if "messages" not in st.session_state:
-    st.session_state.messages = []
+    st.session_state.messages = [
+        {"role": "bot", "text": "Hi! I’m AlertAid 🤖\nI can help you with disaster info (before, during, after)."}
+    ]
 
-with st.form(key="chat_form"):
-    user_input = st.text_input("", key="unique_key_input")
-    submit = st.form_submit_button("Send")
-
-    if submit and user_input:
-        st.session_state.messages.append({"role": "user", "text": user_input})
-        bot_response = get_response(user_input)
-        st.session_state.messages.append({"role": "bot", "text": bot_response})
-
-# ------------------- DISPLAY CHAT -------------------
-st.markdown('<div class="container">', unsafe_allow_html=True)
+# ------------------- CHAT DISPLAY -------------------
+st.markdown('<div class="chatbox">', unsafe_allow_html=True)
 
 for msg in st.session_state.messages:
     if msg["role"] == "user":
         st.markdown(f'<div class="user">{msg["text"]}</div>', unsafe_allow_html=True)
     else:
         st.markdown(f'<div class="bot">{msg["text"]}</div>', unsafe_allow_html=True)
+
+st.markdown('</div>', unsafe_allow_html=True)
+
+# ------------------- INPUT AREA -------------------
+st.markdown('<div class="input-area">', unsafe_allow_html=True)
+
+with st.form(key="chat_form"):
+    col1, col2 = st.columns([4, 1])
+    with col1:
+        user_input = st.text_input("", key="unique_key_input")
+    with col2:
+        submit = st.form_submit_button("Send")
+
+    if submit and user_input:
+        st.session_state.messages.append({"role": "user", "text": user_input})
+        bot_response = get_response(user_input)
+        st.session_state.messages.append({"role": "bot", "text": bot_response})
 
 st.markdown('</div>', unsafe_allow_html=True)
