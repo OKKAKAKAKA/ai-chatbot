@@ -180,12 +180,17 @@ st.markdown('<div class="input-area">', unsafe_allow_html=True)
 with st.form(key="chat_form"):
     col1, col2 = st.columns([4, 1])
 
-    user_input = st.text_input("", value="")
+    # IMPORTANT: use key to store value
+    user_input = st.text_input("", key="input_text")
 
     with col2:
         submit = st.form_submit_button("Send")
 
-if submit and user_input:
-    st.session_state.messages.append({"role": "user", "text": user_input})
-    bot_response = get_response(user_input)
-    st.session_state.messages.append({"role": "bot", "text": bot_response})
+    if submit and st.session_state.input_text:
+        st.session_state.messages.append({"role": "user", "text": st.session_state.input_text})
+        bot_response = get_response(st.session_state.input_text)
+        st.session_state.messages.append({"role": "bot", "text": bot_response})
+
+        # CLEAR INPUT
+        st.session_state.input_text = ""
+        st.experimental_rerun()
