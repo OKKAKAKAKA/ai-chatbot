@@ -97,7 +97,7 @@ st.markdown('<div class="input-area">', unsafe_allow_html=True)
 col1, col2 = st.columns([4, 1])
 
 # IMPORTANT: key must be unique and not used anywhere else
-user_input = col1.input("", key="chat_input", placeholder="Type your message here...")
+user_input = col1.text_input("", key="chat_input", placeholder="Type your message here...")
 
 send = col2.button("Send")
 
