@@ -95,13 +95,16 @@ st.markdown('</div>', unsafe_allow_html=True)
 st.markdown('<div class="input-area">', unsafe_allow_html=True)
 
 col1, col2 = st.columns([4, 1])
-user_input = st.text_input("", key="input_text", placeholder="Type your message here...")
 
-with col2:
-    send = st.button("Send")
-    
+# IMPORTANT: key must be unique and not used anywhere else
+user_input = col1.input("", key="chat_input", placeholder="Type your message here...")
+
+send = col2.button("Send")
+
 if send and user_input.strip() != "":
     st.session_state.messages.append({"role": "user", "text": user_input})
     bot_response = get_response(user_input)
     st.session_state.messages.append({"role": "bot", "text": bot_response})
-    st.session_state.input_text = ""
+
+    # CLEAR INPUT
+    st.session_state.chat_input = ""
