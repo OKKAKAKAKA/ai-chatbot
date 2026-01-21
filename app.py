@@ -89,7 +89,7 @@ with st.form(key="chat_form", clear_on_submit=True):
                 " Have a fire extinguisher ready and know your exits."
             )
             
-         elif "hurricane" in text:
+        elif "hurricane" in text:
             response = (
                 "🌀 Hurricane Safety Tips:\n"
                 " Secure doors and windows, "
