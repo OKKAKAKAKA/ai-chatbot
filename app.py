@@ -78,7 +78,7 @@ def earthquake_after():
     return "🌍 EARTHQUAKE – AFTER\n- Check for injuries\n- Be alert for aftershocks"
 
 def earthquake_info():
-    return "🌍 WHAT IS AN EARTHQUAKE?\nAn earthquake is the sudden shaking of the ground caused by movements in the Earth's crust."
+    return "An earthquake is the sudden shaking of the ground caused by movements in the Earth's crust."
 
 def typhoon_before():
     return "🌪️ TYPHOON – BEFORE\n- Monitor weather updates\n- Secure loose objects"
@@ -90,7 +90,7 @@ def typhoon_after():
     return "🌪️ TYPHOON – AFTER\n- Avoid fallen power lines"
 
 def typhoon_info():
-    return "🌪️ WHAT IS A TYPHOON?\nA typhoon is a powerful tropical cyclone with strong winds and heavy rainfall."
+    return "A typhoon is a powerful tropical cyclone with strong winds and heavy rainfall."
 
 def flood_before():
     return "🌊 FLOOD – BEFORE\n- Prepare evacuation routes\n- Elevate appliances"
@@ -102,7 +102,7 @@ def flood_after():
     return "🌊 FLOOD – AFTER\n- Clean and disinfect your home"
 
 def flood_info():
-    return "🌊 WHAT IS A FLOOD?\nA flood occurs when water overflows onto normally dry land."
+    return "A flood occurs when water overflows onto normally dry land."
 
 def fire_before():
     return "🔥 FIRE – BEFORE\n- Check electrical wiring\n- Keep fire extinguishers ready"
@@ -114,7 +114,7 @@ def fire_after():
     return "🔥 FIRE – AFTER\n- Do not re-enter burned areas"
 
 def fire_info():
-    return "🔥 WHAT IS A FIRE?\nFire is a rapid chemical reaction that produces heat, light, and smoke."
+    return "Fire is a rapid chemical reaction that produces heat, light, and smoke."
 
 # ------------------- CHAT FUNCTION -------------------
 def get_response(user_input):
