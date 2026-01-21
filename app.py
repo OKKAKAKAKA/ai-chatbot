@@ -65,10 +65,10 @@ with st.form(key="chat_form", clear_on_submit=True):
         elif "typhoon" in text:
             response = (
                 "🌪️ Typhoon Safety Tips:\n"
-                "- Stay indoors and away from windows.\n"
-                "- Secure loose objects outside.\n"
-                "- Charge your phone and prepare emergency supplies.\n"
-                "- Listen to local updates and evacuation orders."
+                " Stay indoors and away from windows., "
+                " Secure loose objects outside., "
+                " Charge your phone and prepare emergency supplies., "
+                " Listen to local updates and evacuation orders."
             )
 
         elif "earthquake" in text:
