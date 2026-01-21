@@ -7,7 +7,7 @@ st.markdown(
     """
     <style>
     body {
-        background-color: #FFFFFF;
+        background-color: #ADD8E6;
     }
     .title {
         text-align: center;
@@ -52,12 +52,6 @@ st.markdown(
         background: white;
         padding: 10px 0;
         box-shadow: 0 -1px 8px rgba(0,0,0,0.1);
-    }
-    .input-box {
-        max-width: 700px;
-        margin: 0 auto;
-        display: flex;
-        gap: 10px;
     }
     </style>
     """,
@@ -166,7 +160,7 @@ def get_response(user_input):
 # ------------------- CHAT STATE -------------------
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "bot", "text": "Hi! I’m AlertAid 🤖\nI can help you with disaster info (before, during, after)."}
+        {"role": "bot", "text": "Hi! I’m AlertAid 🤖\nI can help you with disaster info. "}
     ]
 
 # ------------------- CHAT DISPLAY -------------------
@@ -183,7 +177,7 @@ st.markdown('</div>', unsafe_allow_html=True)
 # ------------------- INPUT AREA -------------------
 st.markdown('<div class="input-area">', unsafe_allow_html=True)
 
-with st.form(key="chat_form"):
+with st.form(key="chat_form", clear_on_submit=True):
     col1, col2 = st.columns([4, 1])
     with col1:
         user_input = st.text_input("", key="unique_key_input")
