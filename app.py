@@ -88,10 +88,28 @@ with st.form(key="chat_form", clear_on_submit=True):
                 " If smoke is present, stay low and cover your mouth, "
                 " Have a fire extinguisher ready and know your exits."
             )
+            
+         elif "hurricane" in text:
+            response = (
+                "🌀 Hurricane Safety Tips:\n"
+                " Secure doors and windows, "
+                " Stock up on food, water, and supplies, "
+                " Avoid coastal and flood-prone areas, "
+                " Stay updated with weather alerts and evacuation orders."
+            )
+
+        elif "tornado" in text:
+            response = (
+                "🌪️ Tornado Safety Tips:\n"
+                " Go to a basement or interior room without windows, "
+                " Stay low and cover your head, "
+                " Avoid staying in a mobile home, "
+                " If driving, exit the vehicle and find a sturdy shelter."
+            )
 
         else:
             response = (
-                "I can help with Flood, Typhoon, Earthquake, and Fire preparedness. "
+                "I can help with Flood, Typhoon, Earthquake, Tornado, Hurricane and Fire preparedness. "
                 "What would you like to know?"
             )
 
