@@ -63,49 +63,49 @@ st.markdown('<div class="title">AlertAid</div>', unsafe_allow_html=True)
 
 # ------------------- DISASTER FUNCTIONS -------------------
 def earthquake_before():
-    return "🌍 EARTHQUAKE – BEFORE\n- Secure heavy furniture\n- Prepare emergency kit\n- Identify safe places in your home"
+    return "- Secure heavy furniture\n- Prepare emergency kit\n- Identify safe places in your home"
 
 def earthquake_during():
-    return "🌍 EARTHQUAKE – DURING\n- Drop, Cover, and Hold On\n- Stay away from windows"
+    return "- Drop, Cover, and Hold On\n- Stay away from windows"
 
 def earthquake_after():
-    return "🌍 EARTHQUAKE – AFTER\n- Check for injuries\n- Be alert for aftershocks"
+    return "- Check for injuries\n- Be alert for aftershocks"
 
 def earthquake_info():
     return "An earthquake is the sudden shaking of the ground caused by movements in the Earth's crust."
 
 def typhoon_before():
-    return "🌪️ TYPHOON – BEFORE\n- Monitor weather updates\n- Secure loose objects"
+    return "- Monitor weather updates\n- Secure loose objects"
 
 def typhoon_during():
-    return "🌪️ TYPHOON – DURING\n- Stay indoors\n- Avoid floodwaters"
+    return "- Stay indoors\n- Avoid floodwaters"
 
 def typhoon_after():
-    return "🌪️ TYPHOON – AFTER\n- Avoid fallen power lines"
+    return "- Avoid fallen power lines"
 
 def typhoon_info():
     return "A typhoon is a powerful tropical cyclone with strong winds and heavy rainfall."
 
 def flood_before():
-    return "🌊 FLOOD – BEFORE\n- Prepare evacuation routes\n- Elevate appliances"
+    return "- Prepare evacuation routes\n- Elevate appliances"
 
 def flood_during():
-    return "🌊 FLOOD – DURING\n- Move to higher ground\n- Do not walk through floodwaters"
+    return "- Move to higher ground\n- Do not walk through floodwaters"
 
 def flood_after():
-    return "🌊 FLOOD – AFTER\n- Clean and disinfect your home"
+    return "- Clean and disinfect your home"
 
 def flood_info():
     return "A flood occurs when water overflows onto normally dry land."
 
 def fire_before():
-    return "🔥 FIRE – BEFORE\n- Check electrical wiring\n- Keep fire extinguishers ready"
+    return "- Check electrical wiring\n- Keep fire extinguishers ready"
 
 def fire_during():
-    return "🔥 FIRE – DURING\n- Stay low to avoid smoke\n- Evacuate immediately"
+    return "- Stay low to avoid smoke\n- Evacuate immediately"
 
 def fire_after():
-    return "🔥 FIRE – AFTER\n- Do not re-enter burned areas"
+    return "- Do not re-enter burned areas"
 
 def fire_info():
     return "Fire is a rapid chemical reaction that produces heat, light, and smoke."
@@ -160,28 +160,8 @@ def get_response(user_input):
 # ------------------- CHAT STATE -------------------
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "bot", "text": "Hi! I’m AlertAid 🤖\nI can help you with disaster info (before, during, after)."}
+        {"role": "bot", "text": "Hi! I’m AlertAid 🤖\nHow can I help you today?"}
     ]
-
-# ------------------- INPUT AREA -------------------
-st.markdown('<div class="input-area">', unsafe_allow_html=True)
-
-with st.form(key="chat_form"):
-    col1, col2 = st.columns([4, 1])
-
-    # Auto-clear input by using an empty default value
-    user_input = st.text_input("", key="input_value", value="")
-
-    with col2:
-        submit = st.form_submit_button("Send")
-
-    if submit and user_input:
-        st.session_state.messages.append({"role": "user", "text": user_input})
-        bot_response = get_response(user_input)
-        st.session_state.messages.append({"role": "bot", "text": bot_response})
-
-        # Set a special flag to clear the input
-        st.session_state["clear_input"] = True
 
 # ------------------- CHAT DISPLAY -------------------
 st.markdown('<div class="chatbox">', unsafe_allow_html=True)
@@ -194,7 +174,19 @@ for msg in st.session_state.messages:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# Clear the input after submit
-if st.session_state.get("clear_input"):
-    st.session_state.input_value = ""
-    st.session_state.clear_input = False
+# ------------------- INPUT AREA (BOTTOM) -------------------
+st.markdown('<div class="input-area">', unsafe_allow_html=True)
+
+with st.form(key="chat_form"):
+    col1, col2 = st.columns([4, 1])
+
+    user_input = st.text_input("", value="")
+
+    with col2:
+        submit = st.form_submit_button("Send")
+
+    if submit and user_input:
+        st.session_state.messages.append({"role": "user", "text": user_input})
+        bot_response = get_response(user_input)
+        st.session_state.messages.append({"role": "bot", "text": bot_response})
+        st.experimental_rerun()
