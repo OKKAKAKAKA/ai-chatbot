@@ -15,7 +15,7 @@ st.markdown(
 # Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "bot", "text": "Hello! I'm AlertAid. Ask me about Flood, Typhoon, Earthquake, or Fire safety."}
+        {"role": "bot", "text": "Hello! I'm AlertAid. Ask me about Flood, Typhoon, Earthquake, Hurricane, Tornado or Fire safety."}
     ]
 
 def add_message(role, text):
