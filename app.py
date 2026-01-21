@@ -186,7 +186,8 @@ with st.form(key="chat_form"):
         submit = st.form_submit_button("Send")
 
     if submit and user_input:
-        st.session_state.messages.append({"role": "user", "text": user_input})
-        bot_response = get_response(user_input)
-        st.session_state.messages.append({"role": "bot", "text": bot_response})
-        st.experimental_rerun()
+    st.session_state.messages.append({"role": "user", "text": user_input})
+    bot_response = get_response(user_input)
+    st.session_state.messages.append({"role": "bot", "text": bot_response))
+    st.experimental_rerun()
+
