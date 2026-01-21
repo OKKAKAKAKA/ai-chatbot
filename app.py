@@ -96,8 +96,8 @@ st.markdown('<div class="input-area">', unsafe_allow_html=True)
 
 col1, col2 = st.columns([4, 1])
 
-# IMPORTANT: key must be unique and not used anywhere else
-user_input = col1.text_input("", key="chat_input", placeholder="Type your message here...")
+# ❗ NO session_state used for input
+user_input = col1.text_input("", placeholder="Type your message here...")
 
 send = col2.button("Send")
 
@@ -106,5 +106,6 @@ if send and user_input.strip() != "":
     bot_response = get_response(user_input)
     st.session_state.messages.append({"role": "bot", "text": bot_response})
 
-    # CLEAR INPUT
-    st.session_state.chat_input = ""
+    # THIS IS THE KEY CHANGE:
+    # We restart the app AFTER sending so the input clears safely
+    st.experimental_rerun()
