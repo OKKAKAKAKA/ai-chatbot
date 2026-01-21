@@ -235,7 +235,7 @@ def get_response(user_input):
         elif "during" in user_input:
             return earthquake_during()
         elif "after" in user_input:
-    return "🌊 FLOOD – AFTER\n- Clean and disinfect your home"
+            return "🌊 FLOOD – AFTER\n- Clean and disinfect your home"
 
 def flood_info():
     return "🌊 WHAT IS A FLOOD?\nA flood occurs when water overflows onto normally dry land."
