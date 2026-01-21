@@ -82,9 +82,6 @@ if "messages" not in st.session_state:
         {"role": "bot", "text": "Hi! I’m AlertAid 🤖\nI can help you with disaster information. Ask me anything!"}
     ]
 
-if "last_msg_id" not in st.session_state:
-    st.session_state.last_msg_id = 0
-
 # ------------------- CHAT DISPLAY -------------------
 st.markdown('<div class="chatbox">', unsafe_allow_html=True)
 for msg in st.session_state.messages:
@@ -97,18 +94,14 @@ st.markdown('</div>', unsafe_allow_html=True)
 # ------------------- INPUT AREA (BOTTOM) -------------------
 st.markdown('<div class="input-area">', unsafe_allow_html=True)
 
-with st.form(key="chat_form", clear_on_submit=True):
-    col1, col2 = st.columns([4, 1])
-    user_input = st.text_input("", key="input_text", placeholder="Type your message here...")
+col1, col2 = st.columns([4, 1])
+user_input = st.text_input("", key="input_text", placeholder="Type your message here...")
 
-    with col2:
-        submit = st.form_submit_button("Send")
+with col2:
+    send = st.button("Send")
 
-    # ✅ Only append once per submit
-    if submit and user_input:
-        msg_id = st.session_state.last_msg_id + 1
-        st.session_state.last_msg_id = msg_id
-
-        st.session_state.messages.append({"role": "user", "text": user_input})
-        bot_response = get_response(user_input)
-        st.session_state.messages.append({"role": "bot", "text": bot_response})
+if send and user_input:
+    st.session_state.messages.append({"role": "user", "text": user_input})
+    bot_response = get_response(user_input)
+    st.session_state.messages.append({"role": "bot", "text": bot_response})
+    st.session_state.input_text = ""
