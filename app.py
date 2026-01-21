@@ -99,3 +99,9 @@ user_input = st.text_input("", key="input_text", placeholder="Type your message 
 
 with col2:
     send = st.button("Send")
+    
+if send and user_input.strip() != "":
+    st.session_state.messages.append({"role": "user", "text": user_input})
+    bot_response = get_response(user_input)
+    st.session_state.messages.append({"role": "bot", "text": bot_response})
+    st.session_state.input_text = ""
