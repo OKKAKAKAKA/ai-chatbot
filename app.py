@@ -105,7 +105,3 @@ if send and user_input.strip() != "":
     st.session_state.messages.append({"role": "user", "text": user_input})
     bot_response = get_response(user_input)
     st.session_state.messages.append({"role": "bot", "text": bot_response})
-
-    # THIS IS THE KEY CHANGE:
-    # We restart the app AFTER sending so the input clears safely
-    st.experimental_rerun()
