@@ -1,6 +1,60 @@
 import streamlit as st
 
-st.set_page_config(page_title="AlertAid", page_icon="🆘")
+st.set_page_config(page_title="AlertAid", page_icon="🆘", layout="centered")
+
+# --------- STYLE ----------
+st.markdown(
+    """
+    <style>
+    body {
+        background-color: #FFFFFF;
+    }
+    .title {
+        text-align: center;
+        font-size: 48px;
+        font-weight: 700;
+        color: #111111;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .subtitle {
+        text-align: center;
+        font-size: 18px;
+        color: #555555;
+        margin-bottom: 30px;
+    }
+    .user-bubble {
+        text-align: right;
+        background-color: #DCF8C6;
+        padding: 10px;
+        border-radius: 15px;
+        margin: 5px 0;
+        width: fit-content;
+        float: right;
+        clear: both;
+    }
+    .bot-bubble {
+        text-align: left;
+        background-color: #F1F0F0;
+        padding: 10px;
+        border-radius: 15px;
+        margin: 5px 0;
+        width: fit-content;
+        float: left;
+        clear: both;
+    }
+    .chatbox {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+st.markdown("<div class='title'>AlertAid</div>", unsafe_allow_html=True)
+st.markdown("<div class='subtitle'>Disaster Information Chatbot</div>", unsafe_allow_html=True)
 
 # ------------------- DISASTER INFO FUNCTIONS -------------------
 def earthquake_before():
@@ -34,6 +88,42 @@ def flood_during():
     return "🌊 FLOOD – DURING\n- Move to higher ground\n- Do not walk through floodwaters"
 
 def flood_after():
+    return "🌊 FLOOD – AFTER\n- Clean and disinfect your home"
+
+def flood_info():
+    return "🌊 WHAT IS A FLOOD?\nA flood occurs when water overflows onto normally dry land."
+
+def fire_before():
+    return "🔥 FIRE – BEFORE\n- Check electrical wiring\n- Keep fire extinguishers ready"
+
+def fire_during():
+    return "🔥 FIRE – DURING\n- Stay low to avoid smoke\n- Evacuate immediately"
+
+def fire_after():
+    return "🔥 FIRE – AFTER\n- Do not re-enter burned areas"
+
+def fire_info():
+    return "🔥 WHAT IS A FIRE?\nFire is a rapid chemical reaction that produces heat, light, and smoke."
+
+# ------------------- CHAT FUNCTION -------------------
+def get_response(user_input):
+    user_input = user_input.lower()
+
+    if "what is" in user_input and "earthquake" in user_input:
+        return earthquake_info()
+    elif "what is" in user_input and "typhoon" in user_input:
+        return typhoon_info()
+    elif "what is" in user_input and "flood" in user_input:
+        return flood_info()
+    elif "what is" in user_input and "fire" in user_input:
+        return fire_info()
+
+    elif "earthquake" in user_input:
+        if "before" in user_input:
+            return earthquake_before()
+        elif "during" in user_input:
+            return earthquake_during()
+        elif "after" in user_input:
     return "🌊 FLOOD – AFTER\n- Clean and disinfect your home"
 
 def flood_info():
