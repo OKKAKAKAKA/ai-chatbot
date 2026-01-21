@@ -160,12 +160,28 @@ def get_response(user_input):
 # ------------------- CHAT STATE -------------------
 if "messages" not in st.session_state:
     st.session_state.messages = [
-        {"role": "bot", "text": "Hi! I’m AlertAid 🤖\nI can help you with disaster info."}
+        {"role": "bot", "text": "Hi! I’m AlertAid 🤖\nI can help you with disaster info (before, during, after)."}
     ]
 
-# Initialize input value
-if "input_value" not in st.session_state:
-    st.session_state.input_value = ""
+# ------------------- INPUT AREA -------------------
+st.markdown('<div class="input-area">', unsafe_allow_html=True)
+
+with st.form(key="chat_form"):
+    col1, col2 = st.columns([4, 1])
+
+    # Auto-clear input by using an empty default value
+    user_input = st.text_input("", key="input_value", value="")
+
+    with col2:
+        submit = st.form_submit_button("Send")
+
+    if submit and user_input:
+        st.session_state.messages.append({"role": "user", "text": user_input})
+        bot_response = get_response(user_input)
+        st.session_state.messages.append({"role": "bot", "text": bot_response})
+
+        # Set a special flag to clear the input
+        st.session_state["clear_input"] = True
 
 # ------------------- CHAT DISPLAY -------------------
 st.markdown('<div class="chatbox">', unsafe_allow_html=True)
@@ -178,23 +194,7 @@ for msg in st.session_state.messages:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# ------------------- INPUT AREA -------------------
-st.markdown('<div class="input-area">', unsafe_allow_html=True)
-
-with st.form(key="chat_form"):
-    col1, col2 = st.columns([4, 1])
-    with col1:
-        user_input = st.text_input("", key="input_value")
-    with col2:
-        submit = st.form_submit_button("Send")
-
-    if submit and user_input:
-        st.session_state.messages.append({"role": "user", "text": user_input})
-        bot_response = get_response(user_input)
-        st.session_state.messages.append({"role": "bot", "text": bot_response})
-
-        # CLEAR INPUT AFTER SEND
-        st.session_state.input_value = ""
-        st.experimental_rerun()
-
-st.markdown('</div>', unsafe_allow_html=True)
+# Clear the input after submit
+if st.session_state.get("clear_input"):
+    st.session_state.input_value = ""
+    st.session_state.clear_input = False
