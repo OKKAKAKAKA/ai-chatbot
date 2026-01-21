@@ -46,7 +46,6 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# ------------------- TITLE -------------------
 st.markdown('<div class="title">AlertAid</div>', unsafe_allow_html=True)
 
 # ------------------- DISASTER FUNCTIONS -------------------
@@ -143,15 +142,14 @@ def get_response(user_input):
         elif "after" in user_input:
             return fire_after()
 
-    else:
-        return "Sorry, I didn't understand."
+    return "Sorry, I didn't understand."
 
 # ------------------- CHAT STATE -------------------
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
 with st.form(key="chat_form"):
-    user_input = st.text_input("", key="user_input_text")
+    user_input = st.text_input("", key="unique_input_key")
     submit = st.form_submit_button("Send")
 
     if submit and user_input:
@@ -167,26 +165,6 @@ for msg in st.session_state.messages:
     else:
         st.markdown(f'<div class="bot">{msg["text"]}</div>', unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
-        text-align: left;
-        background-color: #F1F0F0;
-        padding: 10px;
-        border-radius: 15px;
-        margin: 5px 0;
-        width: fit-content;
-        float: left;
-        clear: both;
-    }
-    .chatbox {
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-st.markdown("<div class='title'>AlertAid</div>", unsafe_allow_html=True)
 st.markdown("<div class='subtitle'>Disaster Information Chatbot</div>", unsafe_allow_html=True)
 
 # ------------------- DISASTER INFO FUNCTIONS -------------------
