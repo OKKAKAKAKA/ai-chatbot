@@ -25,20 +25,20 @@ def typhoon_info(): return "A typhoon is a powerful tropical cyclone with strong
 def flood_info(): return "A flood occurs when water overflows onto normally dry land."
 def fire_info(): return "Fire is a rapid chemical reaction that produces heat, light, and smoke."
 
-def earthquake_before(): return "- Secure heavy furniture\n- Prepare emergency kit\n- Identify safe places in your home"
-def earthquake_during(): return "- Drop, Cover, and Hold On\n- Stay away from windows"
-def earthquake_after(): return "- Check for injuries\n- Be alert for aftershocks"
+def earthquake_before(): return "- Secure heavy furniture, Prepare emergency kit, Identify safe places in your home"
+def earthquake_during(): return "- Drop, Cover, and Hold and Stay away from windows"
+def earthquake_after(): return "- Check for injuries and Be alert for aftershocks"
 
-def typhoon_before(): return "- Monitor weather updates\n- Secure loose objects"
-def typhoon_during(): return "- Stay indoors\n- Avoid floodwaters"
+def typhoon_before(): return "- Monitor weather updates and Secure loose objects"
+def typhoon_during(): return "- Stay indoors and Avoid floodwaters"
 def typhoon_after(): return "- Avoid fallen power lines"
 
-def flood_before(): return "- Prepare evacuation routes\n- Elevate appliances"
-def flood_during(): return "- Move to higher ground\n- Do not walk through floodwaters"
+def flood_before(): return "- Prepare evacuation routes and Elevate appliances"
+def flood_during(): return "- Move to higher ground and Do not walk through floodwaters"
 def flood_after(): return "- Clean and disinfect your home"
 
-def fire_before(): return "- Check electrical wiring\n- Keep fire extinguishers ready"
-def fire_during(): return "- Stay low to avoid smoke\n- Evacuate immediately"
+def fire_before(): return "- Check electrical wiring and Keep fire extinguishers ready"
+def fire_during(): return "- Stay low to avoid smoke and Evacuate immediately"
 def fire_after(): return "- Do not re-enter burned areas"
 
 # ------------------- CHAT FUNCTION -------------------
@@ -99,9 +99,3 @@ user_input = st.text_input("", key="input_text", placeholder="Type your message 
 
 with col2:
     send = st.button("Send")
-
-if send and user_input:
-    st.session_state.messages.append({"role": "user", "text": user_input})
-    bot_response = get_response(user_input)
-    st.session_state.messages.append({"role": "bot", "text": bot_response})
-    st.session_state.input_text = ""
